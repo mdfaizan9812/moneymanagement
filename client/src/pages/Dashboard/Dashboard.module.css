@@ -1,0 +1,66 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: white !important;
+}
+
+.innerContainer {
+    width: 100vw;
+    height: calc(100% - 70px);
+    ;
+    margin-top: 30px;
+}
+
+.header {
+    width: 100vw;
+    height: 70px;
+    background-color: rgb(254, 253, 253);
+    box-shadow: 0px 3px 6px #00000029;
+    display: flex !important;
+}
+
+:global(.ant-layout-header) {
+    padding: 0px !important;
+}
+
+.sider {
+    width: 150px;
+    background-color: white !important;
+    border: 1px solid rgb(167, 166, 166) !important;
+}
+
+.leftHeader{
+    width: 50%;
+    height: 100%;
+}
+
+.rightHeader{
+    width: 50%;
+    height: 100%;
+    position: relative;
+}
+
+.profileBox {
+    width: 135px;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    right: 0;
+    padding: 5px;
+}
+
+
+.nameDiv{
+    border: "2px solid red"; 
+    border-radius: "50%"; 
+    margin-top:"10px"
+}
+
+.image {
+    margin-left: 25px;
+    margin-top: 8px;
+}
+
+.image img {
+    border-radius: 50%;
+}

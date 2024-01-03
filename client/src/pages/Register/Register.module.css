@@ -1,0 +1,45 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(75, 72, 72);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.innerContainer {
+    width: 350px;
+    height: 400px;
+    background-color: rgb(255, 254, 254);
+    border-radius: 20px;
+    border: 1px solid grey;
+}
+
+.formContainer {
+    width: 80%;
+    height: 250px;
+    margin-left: 10%;
+    margin-top: 25px;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button {
+    width: 120px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.forgetLink {
+    display: block;
+    width: 120px;
+    height: 30px;
+    text-align: end;
+}
