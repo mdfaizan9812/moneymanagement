@@ -18,6 +18,8 @@ const API = {
     GET_ALL_EXPENSE: "/api/v1/expense",
     UPDATE_EXPENSE: "/api/v1/expense",
     DELETE_EXPENSE: "/api/v1/expense",
+    ADD_BORROW_LENT: "/api/v1/borrowAndLent/set",
+    GET_ALL_BORROW_LENT: "/api/v1/borrowAndLent",
 }
 
 module.exports = API;
