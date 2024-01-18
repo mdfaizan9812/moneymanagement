@@ -41,7 +41,6 @@ const NewPassword = () => {
       }
     });
   }, [])
-  console.log(formData);
 
   async function handleSubmit() {
     try {

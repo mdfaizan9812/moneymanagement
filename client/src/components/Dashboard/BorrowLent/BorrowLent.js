@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import Style from "./BorrowLent.module.css"
-import { Button, Input, Modal, Form, Upload, Table, Image, Dropdown, Menu, Select, DatePicker } from 'antd'
-import { BORROWLENTPLACEHOLDER, BORROWLENT, CATEGORY, CATEGORYPLACEHOLDER } from '../../../constants/appConstant';
+import { Button, Input, Modal, Form, Table, Dropdown, Menu, Select, DatePicker } from 'antd'
+import { BORROWLENTPLACEHOLDER, BORROWLENT } from '../../../constants/appConstant';
 import API from '../../../constants/apiConstant';
-import { TagsOutlined, UploadOutlined, MoreOutlined, FolderOutlined } from '@ant-design/icons';
+import { TagsOutlined, MoreOutlined } from '@ant-design/icons';
 import { DELETE, POST } from '../../../utils/apiFunction';
 import { toastUtility } from '../../../utils/toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { borrowLentDetails } from '../../../redux/action/borrowLent';
-// import UpdateCategory from './UpdateCategory';
 import AppAlert from '../AppAlert';
 import moment from 'moment';
+import UpdateBorrowLent from './UpdateBorrowLent';
 const { Option } = Select;
 
 const BorrowLent = () => {
@@ -19,7 +19,6 @@ const BorrowLent = () => {
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [currentRecord, setCurrentRecord] = useState({});
-    const [iconData, setIconData] = useState(null);
     const [formData, setFormData] = useState({
         personName: "",
         type: "",
@@ -111,7 +110,7 @@ const BorrowLent = () => {
 
     async function handleDelete() {
         try {
-            const data = await DELETE(`${API.BASEURL}${API.DELETE_CATEGORY}/${currentRecord._id}`, true);
+            const data = await DELETE(`${API.BASEURL}${API.DELETE_BORROW_LENT}/${currentRecord._id}`, true);
             toastUtility("success", data.data.message);
             dispatch(borrowLentDetails())
             setIsDeleteModalOpen(false);
@@ -142,7 +141,6 @@ const BorrowLent = () => {
             </Menu.Item>
         </Menu>
     );
-    console.log(BorrowLent);
     const tableColumns = [
         {
             title: 'Person Name',
@@ -191,20 +189,6 @@ const BorrowLent = () => {
         }
     ]
 
-    function handleUpload({ file, onSuccess, onError }) {
-        setIconData(file);
-        if (file.type.split('/')[0] === 'image') {
-            onSuccess("Uploaded");
-        }
-        else {
-            onError("Only image is allowed");
-        }
-    }
-    function handleIconRemove(file) {
-        if (file) {
-            setIconData(null);
-        }
-    }
     return (
         <div>
             {/* header */}
@@ -311,8 +295,8 @@ const BorrowLent = () => {
                 rowClassNameClassName={Style.tableRow}
                 scroll={{ y: 300 }}
             />
-            {/* {isUpdateModalOpen && <UpdateCategory setIsUpdateModalOpen={setIsUpdateModalOpen} isUpdateModalOpen={isUpdateModalOpen} currentRecord={currentRecord} setCurrentRecord={setCurrentRecord} />} */}
-            {/* {isDeleteModalOpen && <AppAlert title="Delete Category" isOpen={isDeleteModalOpen} setIsOpen={setIsDeleteModalOpen} id={currentRecord._id} featureName="category" setCurrentRecord={setCurrentRecord} handleDelete={handleDelete} />} */}
+            {isUpdateModalOpen && <UpdateBorrowLent setIsUpdateModalOpen={setIsUpdateModalOpen} isUpdateModalOpen={isUpdateModalOpen} currentRecord={currentRecord} setCurrentRecord={setCurrentRecord} />}
+            {isDeleteModalOpen && <AppAlert title="Delete Borrow or lent" isOpen={isDeleteModalOpen} setIsOpen={setIsDeleteModalOpen} id={currentRecord._id} featureName="borrowlent" setCurrentRecord={setCurrentRecord} handleDelete={handleDelete} />}
         </div>
     )
 }

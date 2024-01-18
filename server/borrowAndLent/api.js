@@ -34,9 +34,11 @@ const updateBorrowAndLent = async (req, res, next) => {
     try {
         let { type, personName, amount, typeDate, dueDate } = req.body;
         const balId = req.params.id;
-        personName = personName ? personName.toLowerCase().trim() : undefined;
+        personName = personName?.length ? personName.toLowerCase().trim() : undefined;
         typeDate = typeDate ? moment(typeDate).utc() : undefined;
         dueDate = dueDate ? moment(dueDate).utc() : undefined;
+        type = type?.length > 0 ? type.toLowerCase() : undefined;
+        amount = amount?.length > 0 ? amount : undefined
 
         const userId = req.user.id;
 
@@ -49,7 +51,7 @@ const updateBorrowAndLent = async (req, res, next) => {
             return next(AppError(message.msg52, 400));
         }
 
-        await borrowAndLentService.updateBorrowAndLent({ type, personName, amount, typeDate, dueDate });
+        await borrowAndLentService.updateBorrowAndLent({ _id: balId }, { type, personName, amount, typeDate, dueDate });
         return res.status(200).json(AppResponse(200, message.msg53));
     } catch (error) {
         console.log(error);
@@ -71,7 +73,7 @@ const deleteBorrowAndLent = async (req, res, next) => {
         }
 
         await borrowAndLentService.updateBorrowAndLent({ _id: balId }, { isDeleted: true });
-        return res.status(200).json(AppResponse(200, message.msg53));
+        return res.status(200).json(AppResponse(200, message.msg55));
     } catch (error) {
         console.log(error);
     }
