@@ -54,12 +54,15 @@ const validateUpdateBorrowAndLent = (req, res, next) => {
     const schema = Joi.object({
         type: Joi.string()
             .trim()
-            .valid("lent", "borrow"),
+            .allow('')
+            .allow(null),
         personName: Joi.string()
             .regex(/^[a-z A-Z]+$/)
             .min(3)
             .max(25)
             .trim()
+            .allow('')
+            .allow(null)
             .messages({
                 'string.base': 'playerName must be a string',
                 'string.empty': 'playerName cannot be empty',
@@ -68,15 +71,21 @@ const validateUpdateBorrowAndLent = (req, res, next) => {
                 'any.required': 'playerName is required'
             }),
         amount: Joi.number()
+            .allow('')
+            .allow(null)
             .messages({
                 "string.min": "amount must have at least 3 characters",
                 'string.max': 'amount can have at most 50 characters',
                 'any.required': 'amount is required'
             }),
         typeDate: Joi.date()
-            .max(typeDate),
+            .max(typeDate)
+            .allow('')
+            .allow(null),
         dueDate: Joi.date()
-            .min(typeDate),
+            .min(typeDate)
+            .allow('')
+            .allow(null),
         id: Joi.string()
             .min(24)
             .max(24)

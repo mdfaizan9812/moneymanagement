@@ -77,7 +77,6 @@ const UpdateExpense = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentRecord,
         setIsUpdateModalOpen(false)
         setCurrentRecord({});
     }
-    console.log(formData);
     return (
         <>
             <Modal
@@ -105,7 +104,7 @@ const UpdateExpense = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentRecord,
                         </Form.Item>
                         <Form.Item
                             name="categoryId"
-                            rules={[{message: EXPENSE.inputCategory }]}
+                            rules={[{ message: EXPENSE.inputCategory }]}
                             initialValue={currentRecord.categoryId}
                         >
                             <Select defaultValue="None">
@@ -119,7 +118,7 @@ const UpdateExpense = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentRecord,
                         </Form.Item>
                         <Form.Item
                             name="date"
-                            // initialValue={moment(currentRecord.date).format('DD/MM/YYYY')}
+                        // initialValue={moment(currentRecord.date).format('DD/MM/YYYY')}
                         >
                             <DatePicker
                                 style={{ width: "100%" }}

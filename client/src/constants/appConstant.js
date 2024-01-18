@@ -51,6 +51,19 @@ const CATEGORYPLACEHOLDER = {
     inputDescription: "Input description",
 }
 
+const BORROWLENT = {
+    inputPersonName: "Please input person name!",
+    inputType: "Please select a type",
+    inputAmount:"Please input a amount"
+}
+
+const BORROWLENTPLACEHOLDER = {
+    inputPersonName: "Input person name",
+    inputAmount:"Input a amount",
+    inputTypeDate: "Please select a borrow or lent date",
+    inputDueDate: "Please select a due date",
+}
+
 const GENERAL = {
     REGISTRATION: "REGISTRATION",
     VERIFY_OTP: "Verify Your Account",
@@ -77,5 +90,7 @@ module.exports = {
     CATEGORY,
     CATEGORYPLACEHOLDER,
     EXPENSE,
-    EXPENSEPLACEHOLDER
+    EXPENSEPLACEHOLDER,
+    BORROWLENT,
+    BORROWLENTPLACEHOLDER
 }

@@ -28,7 +28,6 @@ const Login = () => {
   }, [])
 
   async function handleSubmit() {
-    console.log("handle submit", formData);
     try {
       const data = await POST(`${API.BASEURL}${API.LOGIN}`, formData);
       toastUtility("success", data.data.message);

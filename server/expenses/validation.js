@@ -12,7 +12,6 @@ const checker = (schema, req, res, next) => {
 };
 
 const validateAddExpense = (req, res, next) => {
-    console.log(req.body);
     const schema = Joi.object({
         productName: Joi.string()
             .regex(/^[a-z A-Z]+$/)
