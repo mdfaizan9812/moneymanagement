@@ -7,6 +7,7 @@ import { PATCH } from '../../../utils/apiFunction'
 import { toastUtility } from '../../../utils/toast'
 import { expenseDetails } from '../../../redux/action/expense'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment'
 const { Option } = Select
 
 const UpdateExpense = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentRecord, setCurrentRecord, page, limit, month }) => {
@@ -118,7 +119,8 @@ const UpdateExpense = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentRecord,
                         </Form.Item>
                         <Form.Item
                             name="date"
-                        // initialValue={moment(currentRecord.date).format('DD/MM/YYYY')}
+                        initialValue={moment(currentRecord.date)}
+                        getPopupContainer={(trigger) => trigger.parentElement}
                         >
                             <DatePicker
                                 style={{ width: "100%" }}

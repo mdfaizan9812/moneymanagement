@@ -83,14 +83,14 @@ const BorrowLent = () => {
             setFormData((prevFormData) => {
                 return {
                     ...prevFormData,
-                    typeDate: e.typeDate.format("YYYY/MM/DD")
+                    typeDate: e.typeDate.format("YYYY-MM-DD")
                 }
             })
         } else if (e.dueDate) {
             setFormData((prevFormData) => {
                 return {
                     ...prevFormData,
-                    dueDate: e.dueDate.format("YYYY/MM/DD")
+                    dueDate: e.dueDate.format("YYYY-MM-DD")
                 }
             })
         }

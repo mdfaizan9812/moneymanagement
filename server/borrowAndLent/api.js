@@ -20,8 +20,8 @@ const setBorrowAndLent = async (req, res, next) => {
         if (!userData[0].phoneNumber) {
             return next(AppError(message.msg49, 400));
         }
-        typeDate = moment(typeDate).utc();
-        dueDate = moment(dueDate).utc();
+        typeDate = moment(typeDate).utc().format();
+        dueDate = moment(dueDate).utc().format();
 
         const createdData = await borrowAndLentService.setBorrowAndLent({ type, personName, amount, typeDate, dueDate, phoneNumber: userData.phoneNumber, userId });
         return res.status(201).json(AppResponse(201, message.msg50, createdData));
