@@ -129,7 +129,7 @@ const UpdateBorrowLent = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentReco
 
                             <Form.Item
                                 name="typeDate"
-                            // initialValue={currentRecord?.typeDate ? moment(currentRecord.typeDate).format("DD/MM/YYYY") : ""}
+                            initialValue={currentRecord?.typeDate ? moment(currentRecord.typeDate) : ""}
                             >
                                 <DatePicker
                                     style={{ width: "100%" }}
@@ -141,7 +141,7 @@ const UpdateBorrowLent = ({ setIsUpdateModalOpen, isUpdateModalOpen, currentReco
 
                             <Form.Item
                                 name="dueDate"
-                            // initialValue={currentRecord?.dueDate ? moment(currentRecord.dueDate).format("DD/MM/YYYY") : ""}
+                            initialValue={currentRecord?.dueDate ? moment(currentRecord.dueDate) : ""}
                             >
                                 <DatePicker
                                     style={{ width: "100%" }}

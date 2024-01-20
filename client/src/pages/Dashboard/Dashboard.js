@@ -9,6 +9,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { getUserName, shortName } from '../../utils/generalFunctions';
 import { GENERAL, ROLE } from '../../constants/appConstant';
 import AppSider from '../../components/AppSider';
+import API from '../../constants/apiConstant';
 const { Sider, Content } = Layout
 
 const Dashboard = () => {
@@ -26,7 +27,6 @@ const Dashboard = () => {
         const name = shortName(User?.image, User?.username)
         setName(name)
     }, [User.image, User.username]);
-
     useEffect(() => {
         if (User && !(User.phoneNumber && User.dob && User.gender)) {
             navigate("/moreinfo")
@@ -55,7 +55,6 @@ const Dashboard = () => {
             </Menu.Item>
         </Menu>
     );
-
     return (
         <>
             <Layout className={Style.container}>
@@ -67,7 +66,7 @@ const Dashboard = () => {
                                 height={50}
                                 alt="Moneymate"
                                 preview={false}
-                                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                                src={`${API.BASEURL}/${User.image}`}
                             />
                         </div>
                     </div>

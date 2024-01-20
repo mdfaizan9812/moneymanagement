@@ -24,7 +24,6 @@ const Category = () => {
     });
     const dispatch = useDispatch();
     const [form] = Form.useForm();
-
     useEffect(() => {
         form.setFieldsValue({
             name: "",
@@ -129,7 +128,10 @@ const Category = () => {
                     <>
                         {
                             record?.icon?.length ?
-                                <Image src={`${API.BASEURL}/${record.icon}`} alt="Category Icon" />
+                                <Image 
+                                preview={false}
+                                src={`${API.BASEURL}/${record.icon}`} alt="Category Icon"
+                                style={{width:"14px", height:"14px"}} />
                                 :
                                 <span><FolderOutlined /></span>
                         }

@@ -6,48 +6,14 @@ const app = express();
 const port = process.env.PORT || 5000
 const cors = require('cors');
 var morgan = require('morgan')
-// const swaggerJsdoc = require('swagger-jsdoc');
-// const swaggerUiExpress = require('swagger-ui-express');
 
 app.use(express.json());
 app.use(cors());
+app.use('/public',express.static('public'));
+// app.use('/uploads', express.static('uploads'))
 app.use(morgan('combined'))
 
 connectdb()
-
-// const options = {
-//   definition: {
-//     openapi: '3.0.0',
-//     info: {
-//       title: 'Moneymate',
-//       version: '1.0.0',
-//     },
-//     servers:[
-//         {
-//             url:"http://localhost:5000/"
-//         }
-//     ]
-//   },
-//   apis: ['./index.js'],
-// };
-
-// const swaggerSpec = swaggerJsdoc(options);
-// app.use('/api-docs', swaggerUiExpress.serve, swaggerUiExpress.setup(swaggerSpec))
-
-// /**
-//  * @swagger
-//  * /:
-//  *  post:
-//  *      summary: This api is usedto check if get method is working or not
-//  *      description: This api is used to check
-//  *      response:
-//  *          200:
-//  *              description: To test method
-//  */
-
-// app.get("/",(req, res)=>{
-//     return res.json({msg:"this is test method"})
-// })
 
 // endpoins
 app.use("/api/v1", require("./router"));
