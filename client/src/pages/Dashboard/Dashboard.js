@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getItem, removeItem } from '../../utils/localStorage';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { userDetails } from "../../redux/action/user";
+import {addInfo} from "../../redux/reducer/user"
 import { Button, Dropdown, Image, Layout, Menu, Space, Tooltip } from 'antd';
 import Style from "./Dashboard.module.css"
 import { DownOutlined } from '@ant-design/icons';
@@ -23,7 +23,7 @@ const Dashboard = () => {
             return
         }
 
-        dispatch(userDetails())
+        dispatch(addInfo())
         const name = shortName(User?.image, User?.username)
         setName(name)
     }, [User.image, User.username]);

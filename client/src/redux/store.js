@@ -1,16 +1,17 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import userReducer from "./reducer/user";
-import { thunk } from "redux-thunk"
+import userSlice from "./reducer/user";
 import categoryReducer from "./reducer/category";
 import expenseReducer from "./reducer/expense";
 import borrowLentReducer from "./reducer/borrowLent";
 
-const rootReducer = combineReducers({
-    User: userReducer,
-    Category: categoryReducer,
-    Expense: expenseReducer,
-    BorrowLent: borrowLentReducer
+import {configureStore} from "@reduxjs/toolkit"
+
+const store = configureStore({
+    reducer: {
+        User: userSlice,
+        Category: categoryReducer,
+        Expense: expenseReducer,
+        BorrowLent: borrowLentReducer
+    }
 })
-const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;

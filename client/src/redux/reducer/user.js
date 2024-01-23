@@ -1,4 +1,8 @@
-const { USER_INFO, SUCCESS, ERROR } = require("../actionTypes/user")
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
+import { getItem } from "../../utils/localStorage";
+import { GET } from "../../utils/apiFunction";
+import API from "../../constants/apiConstant"
 
 const initialState = {
     dob: "",
@@ -11,25 +15,35 @@ const initialState = {
     id: "",
     success: false,
     error: false
-
 }
 
-function userReducer(state = initialState, action) {
-    switch (action.type) {
-        case USER_INFO:
-            return {
-                ...state,
-                dob: action.payload.dob || state.dob,
-                email: action.payload.email || state.email,
-                gender: action.payload.gender || state.gender,
-                image: action.payload.image || state.image,
-                phoneNumber: action.payload.phoneNumber || state.phoneNumber,
-                role: action.payload.role || state.role,
-                username: action.payload.username || state.username,
-                id: action.payload.id || state.id,
-            };
-        default: return state
+export const addInfo = createAsyncThunk("user/details", async() => {
+    const token = getItem("token");
+    const decodedData = jwtDecode(token)
+    const user = await GET(`${API.BASEURL}${API.SINGLE_USER}/${decodedData.id}`, true);
+    return user.data.data;
+})
+
+
+const userSlice = createSlice({
+    name: "user",
+    initialState: initialState,
+    reducers: {
+  
+    },
+    extraReducers: (builder)=>{
+        builder.addCase(addInfo.fulfilled, (state, action) => {
+            state.dob=action.payload.dob;
+            state.email=action.payload.email;
+            state.gender=action.payload.gender;
+            state.image=action.payload.image;
+            state.phoneNumber=action.payload.phoneNumber;
+            state.role=action.payload.role;
+            state.username=action.payload.username;
+            state.id=action.payload._id;
+        })
     }
-}
+})
 
-module.exports = userReducer;
+export default userSlice.reducer;
+// export const {addInfo} = userSlice.actions;
