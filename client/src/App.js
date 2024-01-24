@@ -1,6 +1,6 @@
 import Register from "./pages/Register/Register";
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import VerifyOTP from "./pages/VerifyOTP/VerifyOTP";
@@ -15,31 +15,86 @@ import Budget from "./components/Dashboard/Budget/Budget";
 import BorrowLent from "./components/Dashboard/BorrowLent/BorrowLent";
 import User from "./components/Dashboard/User/User";
 import { ToastContainer } from "react-toastify";
+import Error from "./pages/Error";
+
+const throwError = ()=>{
+  throw "Something went wrong";
+}
+const routes = createBrowserRouter([
+  {
+    errorElement: <Error/>,
+    children:[
+  {
+    path: "/",
+    element: <Login />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
+  },
+  {
+    path: "/verify",
+    element: <VerifyOTP />
+  },
+  {
+    path: "/moreinfo",
+    element: <MoreInfo />,
+    // loader: Afunction     Afunction is a async function that return data after API call.(It may not be async function)
+    // in moreinfo component we can use code like "const data = useLoaderData()",   data will be output of Afunction
+  },
+  {
+    path: "/reset/password",
+    element: <ForgetPassword />
+  },
+  {
+    path: "/reset/password/new",
+    element: <NewPassword />
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "",
+        element: <Visual />
+      },
+      {
+        path: "expense",
+        element: <Expense />
+      },
+      {
+        path: "category",
+        element: <Category />
+      },
+      {
+        path: "budget",
+        element: <Budget />
+      },
+      {
+        path: "borrowlent",
+        element: <BorrowLent />
+      },
+      {
+        path: "user",
+        element: <User />
+      },
+      {
+        path: "change/password",
+        element: <ChangePassword />
+      },
+    ]
+  }
+]}
+])
 
 function App() {
   return (
     <>
-      {/* <MoreInfo /> */}
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/verify" element={<VerifyOTP />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/moreinfo" element={<MoreInfo />} />
-          <Route path="/dashboard" element={<Dashboard />} >
-            <Route index element={<Visual />} />
-            <Route path="category" element={<Category />} />
-            <Route path="expense" element={<Expense />} />
-            <Route path="budget" element={<Budget />} />
-            <Route path="borrowlent" element={< BorrowLent />} />
-            <Route path="user" element={< User />} />
-            <Route exact path="change/password" element={<ChangePassword />} />
-          </Route>
-          <Route exact path="/reset/password" element={<ForgetPassword />} />
-          <Route exact path="/reset/password/new" element={<NewPassword />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={routes}/>
       <ToastContainer />
     </>
   );

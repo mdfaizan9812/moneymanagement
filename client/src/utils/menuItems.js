@@ -58,7 +58,16 @@ export function menuItems(role) {
                         User
                     </NavLink>
                 ),
-            }
+            },
+            {
+                key: "7",
+                icon: <CameraOutlined />,
+                label: (
+                    <NavLink to={"/dashboard/catego"}>
+                        For Error Check
+                    </NavLink>
+                ),
+            },
 
         ]
     } else if (role === ROLE.USER) {
