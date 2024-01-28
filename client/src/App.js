@@ -15,11 +15,21 @@ import Budget from "./components/Dashboard/Budget/Budget";
 import BorrowLent from "./components/Dashboard/BorrowLent/BorrowLent";
 import User from "./components/Dashboard/User/User";
 import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+    },
+  },
+})
 
 function App() {
   return (
-    <>
-      {/* <MoreInfo /> */}
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false}/>
       <BrowserRouter>
         <Routes>
           <Route index element={<Login />} />
@@ -41,7 +51,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <ToastContainer />
-    </>
+      </QueryClientProvider>
   );
 }
 
