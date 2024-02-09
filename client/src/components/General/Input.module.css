@@ -1,0 +1,17 @@
+.innerInput {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input {
+    width: 80%;
+    height: 40px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #d9d6d659;
+    padding-left: 10px;
+}

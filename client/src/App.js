@@ -1,6 +1,6 @@
 import Register from "./pages/Register/Register";
 import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom"
 import Login from "./pages/Login/Login";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import VerifyOTP from "./pages/VerifyOTP/VerifyOTP";
@@ -15,31 +15,83 @@ import Budget from "./components/Dashboard/Budget/Budget";
 import BorrowLent from "./components/Dashboard/BorrowLent/BorrowLent";
 import User from "./components/Dashboard/User/User";
 import { ToastContainer } from "react-toastify";
+import { getItem } from "./utils/localStorage";
+
+const isToken = getItem("token")
+
+const routes = createBrowserRouter([
+  {
+    children: [
+      {
+        path: "/",
+        element: isToken ? <Navigate to={"/dashboard"} /> : <Navigate to={"/login"} />
+      },
+      {
+        path: "/login",
+        element: isToken ? <Navigate to={"/dashboard"} /> : <Login />
+      },
+      {
+        path: "/register",
+        element: isToken ? <Navigate to={"/dashboard"} /> : <Register />
+      },
+      {
+        path: "/verify",
+        element: isToken ? <Navigate to={"/dashboard"} /> : <VerifyOTP />
+      },
+      {
+        path: "/moreinfo",
+        element: <MoreInfo />,
+      },
+      {
+        path: "/reset/password",
+        element: isToken ? <Navigate to={"/dashboard"} /> : <ForgetPassword />
+      },
+      {
+        path: "/reset/password/new",
+        element: isToken ? <Navigate to={"/dashboard"} /> : <NewPassword />
+      },
+      {
+        path: "/dashboard",
+        element: !isToken ? <Navigate to={"/login"} /> : <Dashboard />,
+        children: [
+          {
+            path: "",
+            element: <Visual />
+          },
+          {
+            path: "expense",
+            element: <Expense />
+          },
+          {
+            path: "category",
+            element: <Category />
+          },
+          {
+            path: "budget",
+            element: <Budget />
+          },
+          {
+            path: "borrowlent",
+            element: <BorrowLent />
+          },
+          {
+            path: "user",
+            element: <User />
+          },
+          {
+            path: "change/password",
+            element: <ChangePassword />
+          },
+        ]
+      }
+    ]
+  }
+])
 
 function App() {
   return (
     <>
-      {/* <MoreInfo /> */}
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/verify" element={<VerifyOTP />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/moreinfo" element={<MoreInfo />} />
-          <Route path="/dashboard" element={<Dashboard />} >
-            <Route index element={<Visual />} />
-            <Route path="category" element={<Category />} />
-            <Route path="expense" element={<Expense />} />
-            <Route path="budget" element={<Budget />} />
-            <Route path="borrowlent" element={< BorrowLent />} />
-            <Route path="user" element={< User />} />
-            <Route exact path="change/password" element={<ChangePassword />} />
-          </Route>
-          <Route exact path="/reset/password" element={<ForgetPassword />} />
-          <Route exact path="/reset/password/new" element={<NewPassword />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={routes} />
       <ToastContainer />
     </>
   );

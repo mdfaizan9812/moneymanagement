@@ -18,11 +18,6 @@ const Dashboard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     useEffect(() => {
-        if (!getItem("token")) {
-            navigate("/login");
-            return
-        }
-
         dispatch(userDetails())
         const name = shortName(User?.image, User?.username)
         setName(name)

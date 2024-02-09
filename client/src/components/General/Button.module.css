@@ -1,0 +1,18 @@
+.innerContainerButton {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.button {
+    width: 84%;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #6c10a3, #6c10a378);
+    color: white;
+}
