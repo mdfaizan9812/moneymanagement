@@ -27,9 +27,9 @@ const Register = () => {
                 email: "",
                 password: "",
             });
-            addItem("isVerified", false);
             addItem("code", "registration");
-            navigate(`/verify?email=${formData.email}`);
+            addItem("email", formData.email);
+            navigate(`/verify`);
         } catch (error) {
             const message = error.response.data.message;
             toastUtility("error", message);
@@ -43,6 +43,22 @@ const Register = () => {
                 [e.target.name]: e.target.value
             }
         })
+    }
+
+    function disabledButton() {
+        if (formData.username.length > 0 && formData.email.length > 0 && formData.password.length > 0) {
+            return false;
+        }
+        return true;
+    }
+
+
+    function handleEnterKey(event) {
+        const isDisabled = disabledButton()
+        if (isDisabled) return false;
+        if (event.key === 'Enter') {
+            handleSubmit()
+        }
     }
 
     return (
@@ -69,9 +85,11 @@ const Register = () => {
                     placeholder={USERPLACEHOLDER.inputPassword}
                     value={formData.password}
                     onChange={handleValueChange}
+                    onkeydown={handleEnterKey}
                 />
                 <Button
                     onClick={handleSubmit}
+                    disabled={disabledButton()}
                 />
                 <div className={Style.loginContainer}>
                     <div className={Style.loginInnerContainer}>

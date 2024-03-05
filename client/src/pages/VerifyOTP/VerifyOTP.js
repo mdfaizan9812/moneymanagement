@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
-import { Button, Form, Input } from 'antd';
 import Style from './VerifyOTP.module.css';
 import { useState } from 'react';
-import AppHeader from '../../components/AppHeader';
-import { SafetyCertificateOutlined } from '@ant-design/icons';
 import { GENERAL, USER, USERPLACEHOLDER } from "../../constants/appConstant"
 import API from "../../constants/apiConstant"
 import { toastUtility } from "../../utils/toast"
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { POST } from '../../utils/apiFunction';
 import { addItem, getItem } from '../../utils/localStorage';
+import InnerTitle from '../../components/General/InnerTitle';
+import Button from '../../components/General/Button';
+import Input from '../../components/General/Input';
+import { isRegistration } from '../../utils/global';
 
 const VerifyOTP = () => {
-    const location = useLocation();
     const [formData, setFormData] = useState({
         otp: "",
         email: "",
@@ -23,26 +23,14 @@ const VerifyOTP = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (getItem("token")) {
-            navigate("/dashboard");
-            return
-        }
-
-        const queryParams = new URLSearchParams(location.search);
-        const email = queryParams.get('email');
-        if ((!email || getItem("isVerified") === "true" || typeof getItem("isVerified") === "object") && typeof getItem("code") === "string") {
-            navigate("/login")
-            return;
-        }
-
         setFormData((prevFormData) => {
             return {
                 ...prevFormData,
-                email,
+                email: getItem("email"),
                 code: getItem("code")
             }
         });
-    }, [location.search])
+    }, [])
 
     useEffect(() => {
         setTimeout(() => {
@@ -55,10 +43,9 @@ const VerifyOTP = () => {
         try {
             const data = await POST(`${API.BASEURL}${API.VERIFY_ACCOUNT}`, formData);
             toastUtility("success", data.data.message);
-            addItem("isVerified", true)
             if (getItem("code") === "resetpassword") {
                 addItem("verifyCode", formData.otp)
-                navigate(`/reset/password/new?email=${formData.email}`)
+                navigate(`/reset/password`)
             } else if (getItem("code") === "registration") {
                 navigate("/login")
             }
@@ -68,14 +55,12 @@ const VerifyOTP = () => {
         }
     }
     function handleValueChange(e) {
-        if (e.otp) {
-            setFormData((prevFormData) => {
-                return {
-                    ...prevFormData,
-                    otp: e.otp
-                }
-            })
-        }
+        setFormData((prevFormData) => {
+            return {
+                ...prevFormData,
+                otp: e.target.value
+            }
+        })
     }
 
     async function resendOTP() {
@@ -95,26 +80,42 @@ const VerifyOTP = () => {
             toastUtility("error", message);
         }
     }
+
+    function disabledButton() {
+        if (formData.otp.length > 0) {
+            return false;
+        }
+        return true;
+    }
+
+
+    function handleEnterKey(event) {
+        const isDisabled = disabledButton()
+        if (isDisabled) return false;
+        if (event.key === 'Enter') {
+            handleSubmit()
+        }
+    }
     return (
         <div className={Style.container}>
             <div className={Style.innerContainer}>
-                <AppHeader title={GENERAL.VERIFY_OTP} />
-                <div className={Style.formContainer}>
-                    <Form onFinish={handleSubmit} onValuesChange={handleValueChange}>
-                        <Form.Item
-                            name="otp"
-                            rules={[{ required: true, message: USER.inputOTP }]}
-                            initialValue={formData.username}
-                        >
-                            <Input placeholder={USERPLACEHOLDER.inputOTP} prefix={<SafetyCertificateOutlined />} />
-                        </Form.Item>
-                        <div className={Style.buttons}>
-                            <Form.Item>
-                                <Button htmlType="submit" className={Style.button} style={{ backgroundColor: "#4CAF50", color: "white" }}>Verify</Button>
-                            </Form.Item>
-                            <span className={Style.forgetLink} onClick={resendOTP}>Resend</span>
-                        </div>
-                    </Form>
+                <InnerTitle title="Verify registration" />
+                <Input
+                    type='text'
+                    name='otp'
+                    placeholder={USERPLACEHOLDER.inputOTP}
+                    value={formData.otp}
+                    onChange={handleValueChange}
+                    onkeydown={handleEnterKey}
+                />
+                <Button
+                    onClick={handleSubmit}
+                    disabled={disabledButton()}
+                />
+                <div className={Style.verifyContainer}>
+                    <div className={Style.verifyInnerContainer}>
+                        <button onClick={resendOTP} className={Style.verifyButton}>Resend</button>
+                    </div>
                 </div>
             </div>
         </div>

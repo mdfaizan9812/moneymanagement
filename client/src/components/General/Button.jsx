@@ -5,7 +5,7 @@ const Button = (props) => {
     return (
         <div className={Style.innerContainerButton}>
             <button
-                className={Style.button}
+                className={`${Style.button} ${props.disabled ? Style.opacityButton : ""}`}
                 onClick={props.onClick}
                 disabled={props.disabled}
             >

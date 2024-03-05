@@ -21,6 +21,7 @@ const USERPLACEHOLDER = {
     inputDOB: 'Input your dob',
     inputConfirmPassword: 'Input confirm password',
     inputCurrentPassword: 'Input current password',
+    inputOTP: 'Input an OTP'
 }
 
 const CATEGORY = {
@@ -54,12 +55,12 @@ const CATEGORYPLACEHOLDER = {
 const BORROWLENT = {
     inputPersonName: "Please input person name!",
     inputType: "Please select a type",
-    inputAmount:"Please input a amount"
+    inputAmount: "Please input a amount"
 }
 
 const BORROWLENTPLACEHOLDER = {
     inputPersonName: "Input person name",
-    inputAmount:"Input a amount",
+    inputAmount: "Input a amount",
     inputTypeDate: "Please select a borrow or lent date",
     inputDueDate: "Please select a due date",
 }

@@ -26,7 +26,7 @@ const Login = () => {
         email: "",
         password: "",
       });
-
+      // handle moreinfo, only first time it should be visible
       addItem("token", data.data.token)
       navigate("/dashboard");
     } catch (error) {
@@ -42,6 +42,22 @@ const Login = () => {
         [e.target.name]: e.target.value
       }
     })
+  }
+
+  function disabledButton() {
+    if (formData.email.length > 0 && formData.password.length > 0) {
+      return false;
+    }
+    return true;
+  }
+
+
+  function handleEnterKey(event) {
+    const isDisabled = disabledButton()
+    if (isDisabled) return false;
+    if (event.key === 'Enter') {
+      handleSubmit()
+    }
   }
 
   return (
@@ -61,13 +77,15 @@ const Login = () => {
           placeholder={USERPLACEHOLDER.inputPassword}
           value={formData.password}
           onChange={handleValueChange}
+          onkeydown={handleEnterKey}
         />
         <Button
           onClick={handleSubmit}
+          disabled={disabledButton()}
         />
         <div className={Style.signupForgetContainer}>
           <div className={Style.signupForgetInnerContainer}>
-            <div><NavLink to={"/reset/password"} className={Style.Navlink}>Forget</NavLink></div>
+            <div><NavLink to={"/sendOTP"} className={Style.Navlink}>Forget</NavLink></div>
             <div><NavLink to={"/register"} className={Style.Navlink}>Signup</NavLink></div>
           </div>
         </div>

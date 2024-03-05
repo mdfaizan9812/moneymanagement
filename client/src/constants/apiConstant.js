@@ -1,5 +1,5 @@
 const API = {
-    BASEURL: "http://localhost:5000",
+    BASEURL: "http://localhost:7000",
     REGISTRATION: "/api/v1/user/register",
     VERIFY_ACCOUNT: "/api/v1/user/verify",
     RESEND_OTP: "/api/v1/user/sendOTP",

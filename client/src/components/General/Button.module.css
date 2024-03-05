@@ -15,4 +15,10 @@
     border-radius: 10px;
     background-image: linear-gradient(to right, #6c10a3, #6c10a378);
     color: white;
+    cursor: pointer;
+}
+
+.opacityButton {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
