@@ -63,7 +63,11 @@ const login = async (req, res, next) => {
             gender: existingUser.gender,
             phoneNumber: existingUser.phoneNumber,
             dob: existingUser.dob,
+            isFirstLogin: existingUser.isFirstLogin
         };
+        if(existingUser.isFirstLogin) {
+            await userService.updateUser({_id: existingUser._id, isDeleted:false},{isFirstLogin:false})
+        }
         return res.status(200).json({
             message: message.msg7,
             token: token,

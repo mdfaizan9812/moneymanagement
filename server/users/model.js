@@ -10,7 +10,8 @@ const userSchema = new mongoose.Schema(
         role: { type: "string", default: "user", enum: ["admin", "user"] },
         dob: { type: "date", require: false },
         image: { type: "string", require: false },
-        isDeleted: { type: Boolean, default: true }
+        isDeleted: { type: Boolean, default: true },
+        isFirstLogin: { type: Boolean, default:true},
     },
     {
         timestamps: true,

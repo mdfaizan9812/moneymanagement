@@ -29,17 +29,10 @@ const MoreInfo = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if (!getItem("token")) {
-            navigate("/login");
+        if (!getItem("isFirstLogin")) {
+            navigate("/dashboard");
         }
-        dispatch(userDetails())
     }, [])
-
-    useEffect(()=>{
-        if(User && User.phoneNumber && User.dob && User.gender) {
-            navigate("/dashboard")
-        }
-    },[User])
 
     async function handleSubmit() {
         try {

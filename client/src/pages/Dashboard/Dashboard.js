@@ -22,11 +22,6 @@ const Dashboard = () => {
         const name = shortName(User?.image, User?.username)
         setName(name)
     }, [User.image, User.username]);
-    useEffect(() => {
-        if (User && !(User.phoneNumber && User.dob && User.gender)) {
-            navigate("/moreinfo")
-        }
-    }, [User])
 
     function handleLogout() {
         removeItem("token");
