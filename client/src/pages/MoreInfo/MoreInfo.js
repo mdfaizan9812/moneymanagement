@@ -3,7 +3,7 @@ import Style from './MoreInfo.module.css';
 import { useState } from 'react';
 import API from "../../constants/apiConstant"
 import { toastUtility } from "../../utils/toast"
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { POST } from "../../utils/apiFunction"
 import { addItem, getItem } from '../../utils/localStorage';
 import InnerTitle from '../../components/General/InnerTitle';
@@ -11,6 +11,7 @@ import Select from '../../components/General/Select';
 import Input from '../../components/General/Input';
 import { USERPLACEHOLDER } from '../../constants/appConstant';
 import Button from '../../components/General/Button';
+import { genderData } from '../../constants/arrayConstant';
 
 
 const MoreInfo = () => {
@@ -22,7 +23,8 @@ const MoreInfo = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!getItem("isFirstLogin")) {
+        const isFirstLogin = getItem("isFirstLogin");
+        if(!isFirstLogin) {
             navigate("/dashboard");
         }
     }, [])
@@ -53,25 +55,16 @@ const MoreInfo = () => {
         })
     }
 
-    const selectData = [
-        {
-            title: 'Male',
-            value: 'male'
-        },
-        {
-            title: 'Female',
-            value: 'female'
-        },
-        {
-            title: 'Other',
-            value: 'other'
-        },
-    ]
     function disabledButton() {
         if (formData.gender.length > 0 && formData.phoneNumber.length > 0 && formData.dob.length > 0) {
             return false;
         }
         return true;
+    }
+
+    function handleSkip(){
+        addItem("isFirstLogin", false);
+        navigate("/dashboard");
     }
     
     return (
@@ -79,7 +72,7 @@ const MoreInfo = () => {
             <div className={Style.innerContainer}>
                 <InnerTitle title="MoreInfo" />
                 <Select 
-                    data = {selectData}
+                    data = {genderData}
                     onChange={handleValueChange}
                     name="gender"
                 />
@@ -102,7 +95,7 @@ const MoreInfo = () => {
                     disabled={disabledButton()}
                 />
                 <div className={Style.skipContainer}>
-                    <div className={Style.skip}><NavLink to={"/dashboard"} className={Style.Navlink}>Skip</NavLink></div>
+                    <div className={Style.skip}><button to={"/dashboard"} className={Style.skipButton} onClick={handleSkip}>Skip</button></div>
                 </div>
             </div>
         </div>

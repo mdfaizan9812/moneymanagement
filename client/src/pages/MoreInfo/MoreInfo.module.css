@@ -58,7 +58,8 @@
     display: flex;
     justify-content: end;
 }
-.Navlink {
-    text-decoration: none;
-    color: #6c10a3;
+.skipButton {
+    border: none;
+    background: none;
+    cursor: pointer;
 }

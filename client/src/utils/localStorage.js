@@ -3,7 +3,11 @@ export function addItem(key, data) {
 }
 
 export function getItem(key) {
-    return localStorage.getItem(key);
+    const storageData = localStorage.getItem(key);
+    if(storageData === "true" || storageData === "false"){
+        return storageData == "true"
+    }
+    return storageData
 }
 
 export function removeItem(key) {
