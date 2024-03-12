@@ -1,19 +1,20 @@
 .container {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(75, 72, 72);
+    background-color: #6c10a3;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .innerContainer {
-    width: 350px;
-    height: 400px;
+    width: 300px;
+    height: 420px;
     background-color: rgb(255, 254, 254);
     border-radius: 20px;
     border: 1px solid grey;
 }
+
 
 .formContainer {
     width: 80%;
@@ -42,4 +43,22 @@
     width: 120px;
     height: 30px;
     text-align: end;
+}
+
+.skipContainer{
+    width: 100%;
+    height: 20px;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+
+.skip{
+    width: 80%;
+    height: 20px;
+    display: flex;
+    justify-content: end;
+}
+.Navlink {
+    text-decoration: none;
+    color: #6c10a3;
 }

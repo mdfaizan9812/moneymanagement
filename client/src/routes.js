@@ -37,7 +37,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/moreinfo",
-        element: isToken ? <MoreInfo />: <Navigate to={"/login"}/>,
+        element: <MoreInfo />,
       },
       {
         path: "sendOTP",

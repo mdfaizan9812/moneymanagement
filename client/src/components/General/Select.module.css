@@ -1,0 +1,17 @@
+.innerSelect {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.select {
+    width: 84%;
+    height: 42px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #d9d6d659;
+    padding-left: 10px;
+}
