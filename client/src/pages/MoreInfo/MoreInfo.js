@@ -24,7 +24,7 @@ const MoreInfo = () => {
 
     useEffect(() => {
         const isFirstLogin = getItem("isFirstLogin");
-        if(!isFirstLogin) {
+        if (!isFirstLogin) {
             navigate("/dashboard");
         }
     }, [])
@@ -62,17 +62,17 @@ const MoreInfo = () => {
         return true;
     }
 
-    function handleSkip(){
+    function handleSkip() {
         addItem("isFirstLogin", false);
         navigate("/dashboard");
     }
-    
+
     return (
         <div className={Style.container}>
             <div className={Style.innerContainer}>
                 <InnerTitle title="MoreInfo" />
-                <Select 
-                    data = {genderData}
+                <Select
+                    data={genderData}
                     onChange={handleValueChange}
                     name="gender"
                 />

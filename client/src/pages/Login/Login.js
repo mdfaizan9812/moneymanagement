@@ -21,13 +21,13 @@ const Login = () => {
   async function handleSubmit() {
     try {
       const data = await POST(`${API.BASEURL}${API.LOGIN}`, formData);
-            toastUtility("success", data.data.message);
+      toastUtility("success", data.data.message);
       setFormData({
         email: "",
         password: "",
       });
       addItem("token", data.data.token)
-      if(data?.data?.data?.isFirstLogin){
+      if (data?.data?.data?.isFirstLogin) {
         addItem("isFirstLogin", data.data.data.isFirstLogin)
         navigate("/moreinfo");
         return;

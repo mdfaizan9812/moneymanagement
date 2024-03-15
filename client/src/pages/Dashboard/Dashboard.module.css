@@ -29,12 +29,12 @@
     border: 1px solid rgb(167, 166, 166) !important;
 }
 
-.leftHeader{
+.leftHeader {
     width: 50%;
     height: 100%;
 }
 
-.rightHeader{
+.rightHeader {
     width: 50%;
     height: 100%;
     position: relative;
@@ -50,10 +50,10 @@
 }
 
 
-.nameDiv{
-    border: "2px solid red"; 
-    border-radius: "50%"; 
-    margin-top:"10px"
+.nameDiv {
+    border: "2px solid red";
+    border-radius: "50%";
+    margin-top: "10px"
 }
 
 .image {
